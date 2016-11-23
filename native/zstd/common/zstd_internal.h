@@ -31,6 +31,16 @@
 #  endif /* __STDC_VERSION__ */
 #endif
 
+#ifdef _MSC_VER
+#  define FORCE_NOINLINE static __declspec(noinline)
+#else
+#  ifdef __GNUC__
+#    define FORCE_NOINLINE static __attribute__((__noinline__))
+#  else
+#    define FORCE_NOINLINE static
+#  endif
+#endif
+
 
 /*-*************************************
 *  Dependencies
@@ -108,7 +118,8 @@ static const U32 LL_bits[MaxLL+1] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 
 static const S16 LL_defaultNorm[MaxLL+1] = { 4, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1,
                                              2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 2, 1, 1, 1, 1, 1,
                                             -1,-1,-1,-1 };
-static const U32 LL_defaultNormLog = 6;
+#define LL_DEFAULTNORMLOG 6  /* for static allocation */
+static const U32 LL_defaultNormLog = LL_DEFAULTNORMLOG;
 
 static const U32 ML_bits[MaxML+1] = { 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
                                       0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -118,11 +129,13 @@ static const S16 ML_defaultNorm[MaxML+1] = { 1, 4, 3, 2, 2, 2, 2, 2, 2, 1, 1, 1,
                                              1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
                                              1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,-1,-1,
                                             -1,-1,-1,-1,-1 };
-static const U32 ML_defaultNormLog = 6;
+#define ML_DEFAULTNORMLOG 6  /* for static allocation */
+static const U32 ML_defaultNormLog = ML_DEFAULTNORMLOG;
 
 static const S16 OF_defaultNorm[MaxOff+1] = { 1, 1, 1, 1, 1, 1, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1,
                                               1, 1, 1, 1, 1, 1, 1, 1,-1,-1,-1,-1,-1 };
-static const U32 OF_defaultNormLog = 5;
+#define OF_DEFAULTNORMLOG 5  /* for static allocation */
+static const U32 OF_defaultNormLog = OF_DEFAULTNORMLOG;
 
 
 /*-*******************************************

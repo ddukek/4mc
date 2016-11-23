@@ -37,7 +37,7 @@ ZSTD:
 **/
 #include <jni.h>
 #include <zstd.h>
-#include <error_public.h>
+#include <zstd_errors.h>
 
 
 /*

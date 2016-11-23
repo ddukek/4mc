@@ -37,7 +37,7 @@ ZSTD:
 **/
 #include "jnihelper.h"
 #include <zstd.h>
-#include <error_public.h>
+#include <zstd_errors.h>
 
 /* field IDs will not change in the same vm */
 static jfieldID src_pos_id;
